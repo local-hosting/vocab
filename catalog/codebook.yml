@@ -1,0 +1,17 @@
+version: 1
+bands:
+  event:
+    min: 1
+    max: 15
+  action:
+    min: 16
+    max: 31
+  place:
+    min: 32
+    max: 63
+  actor:
+    min: 64
+    max: 79
+  resource:
+    min: 80
+    max: 65535

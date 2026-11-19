@@ -1,0 +1,14 @@
+pack:
+  id: resilience
+  mode: resilience
+  version: 1.0.0
+  vocab_version: 1.0.0
+  description: >-
+    Extends city-default with disaster / off-grid events, shelter sites, and
+    compact three-letter resource wire tokens.
+  min_compose: 0.1.0
+  extends: city-default
+
+languages:
+  - en
+  - es

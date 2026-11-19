@@ -1,0 +1,28 @@
+# Toolchain aligned with local-hosting/workspace tooling/toolchain.json
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+  packages: read
+
+env:
+  TOOLCHAIN_NODE: "26"
+  TOOLCHAIN_YARN: "4.18.1"
+  YARN_NPM_AUTH_TOKEN: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.TOOLCHAIN_NODE }}
+          cache: yarn
+      - run: corepack enable && corepack prepare yarn@${{ env.TOOLCHAIN_YARN }} --activate
+      - run: yarn install --immutable
+      - run: yarn ci

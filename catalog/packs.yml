@@ -1,0 +1,12 @@
+# Pack registry — source of truth for discoverable packs.
+packs:
+  - id: city-default
+    mode: daily
+    extends: null
+    owner: platform
+    spine: en
+  - id: resilience
+    mode: resilience
+    extends: city-default
+    owner: platform
+    spine: en

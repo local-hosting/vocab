@@ -1,0 +1,283 @@
+events:
+  - id: E_flood
+    code: 4
+    labels:
+      en: flood
+      es: inundación
+  - id: E_outage
+    code: 5
+    labels:
+      en: power outage
+      es: apagón
+
+actions:
+  - id: A_evacuate
+    code: 14
+    events: [E_flood]
+    labels:
+      en: evacuate
+      es: evacuar
+  - id: A_deliver
+    code: 15
+    events: [E_flood, E_outage]
+    labels:
+      en: deliver supplies
+      es: entregar suministros
+
+places:
+  - id: P_shelter
+    code: 30
+    type: campground
+    h3: 88283472b3fffff
+    labels:
+      en: emergency shelter
+      es: refugio de emergencia
+  - id: P_lobby
+    code: 31
+    type: hospital
+    h3: 88283472b5fffff
+    labels:
+      en: hospital lobby
+      es: vestíbulo del hospital
+  - id: P_town_hall
+    code: 32
+    type: public_park
+    h3: 88283472b7fffff
+    labels:
+      en: town hall
+      es: ayuntamiento
+
+resources:
+  - id: R_lodging
+    code: 55
+    place_id: P_shelter
+    labels:
+      en: lodging
+      es: alojamiento
+  - id: R_food
+    code: 56
+    place_id: P_shelter
+    labels:
+      en: food
+      es: comida
+  - id: R_shelter_short
+    code: 101
+    wire_code: SST
+    category: shelter
+    subcategory: short-term
+    place_id: P_shelter
+    labels:
+      en: shelter (short-term)
+  - id: R_shelter_long
+    code: 102
+    wire_code: SLT
+    category: shelter
+    subcategory: long-term
+    place_id: P_shelter
+    labels:
+      en: shelter (long-term)
+  - id: R_water_gallon
+    code: 103
+    wire_code: WGL
+    category: water
+    subcategory: gallon
+    place_id: P_shelter
+    labels:
+      en: water (gallon)
+  - id: R_water_bottle
+    code: 104
+    wire_code: WBT
+    category: water
+    subcategory: bottle
+    place_id: P_shelter
+    labels:
+      en: water (bottle)
+  - id: R_water_tap
+    code: 105
+    wire_code: WTP
+    category: water
+    subcategory: tap
+    labels:
+      en: water (tap)
+  - id: R_fuel_pump
+    code: 106
+    wire_code: FPM
+    category: fuel
+    subcategory: pump
+    labels:
+      en: fuel (pump)
+  - id: R_fuel_tank
+    code: 107
+    wire_code: FTK
+    category: fuel
+    subcategory: tank
+    labels:
+      en: fuel (tank)
+  - id: R_internet_venue_hotspot
+    code: 108
+    wire_code: IVS
+    category: internet
+    subcategory: venue hotspot
+    labels:
+      en: internet (venue hotspot)
+  - id: R_internet_mobile_hotspot
+    code: 109
+    wire_code: IMS
+    category: internet
+    subcategory: mobile hotspot
+    labels:
+      en: internet (mobile hotspot)
+  - id: R_internet_satellite
+    code: 110
+    wire_code: IST
+    category: internet
+    subcategory: satellite
+    labels:
+      en: internet (satellite)
+  - id: R_medical_bandages
+    code: 111
+    wire_code: MBD
+    category: medical
+    subcategory: bandages
+    place_id: P_clinic
+    labels:
+      en: medical (bandages)
+  - id: R_medical_aspirin
+    code: 112
+    wire_code: MAS
+    category: medical
+    subcategory: aspirin
+    labels:
+      en: medical (aspirin)
+  - id: R_medical_wrap
+    code: 113
+    wire_code: MWR
+    category: medical
+    subcategory: wrap
+    labels:
+      en: medical (wrap)
+  - id: R_medical_antibiotic
+    code: 114
+    wire_code: MAB
+    category: medical
+    subcategory: antibiotic
+    labels:
+      en: medical (antibiotic)
+  - id: R_donations_food
+    code: 115
+    wire_code: DFD
+    category: donations
+    subcategory: food
+    labels:
+      en: donations (food)
+  - id: R_donations_blanket
+    code: 116
+    wire_code: DBL
+    category: donations
+    subcategory: blanket
+    labels:
+      en: donations (blanket)
+  - id: R_donations_shirt
+    code: 117
+    wire_code: DSH
+    category: donations
+    subcategory: shirt
+    labels:
+      en: donations (shirt)
+  - id: R_donations_pants
+    code: 118
+    wire_code: DPT
+    category: donations
+    subcategory: pants
+    labels:
+      en: donations (pants)
+  - id: R_donations_coat
+    code: 119
+    wire_code: DCT
+    category: donations
+    subcategory: coat
+    labels:
+      en: donations (coat)
+  - id: R_donations_money
+    code: 120
+    wire_code: DMN
+    category: donations
+    subcategory: money
+    labels:
+      en: donations (money)
+  - id: R_power_charging_station
+    code: 121
+    wire_code: PCS
+    category: power
+    subcategory: charging station
+    labels:
+      en: power (charging station)
+  - id: R_power_wall_socket
+    code: 122
+    wire_code: PWS
+    category: power
+    subcategory: wall socket
+    labels:
+      en: power (wall socket)
+  - id: R_power_battery_pack
+    code: 123
+    wire_code: PBP
+    category: power
+    subcategory: battery pack
+    labels:
+      en: power (battery pack)
+  - id: R_supplies_insulation
+    code: 124
+    wire_code: SIL
+    category: supplies
+    subcategory: insulation
+    labels:
+      en: supplies (insulation)
+  - id: R_supplies_hammer_nails
+    code: 125
+    wire_code: SHN
+    category: supplies
+    subcategory: hammer and nails
+    labels:
+      en: supplies (hammer and nails)
+  - id: R_supplies_duct_tape
+    code: 126
+    wire_code: SDC
+    category: supplies
+    subcategory: duct tape
+    labels:
+      en: supplies (duct tape)
+  - id: R_supplies_plastic_sheeting
+    code: 127
+    wire_code: SPS
+    category: supplies
+    subcategory: plastic sheeting
+    labels:
+      en: supplies (plastic sheeting)
+  - id: R_supplies_can_opener
+    code: 128
+    wire_code: SCP
+    category: supplies
+    subcategory: can opener
+    labels:
+      en: supplies (can opener)
+
+actors:
+  - id: PR_coordinator
+    code: 43
+    labels:
+      en: coordinator
+      es: coordinador
+  - id: PR_volunteer
+    code: 44
+    labels:
+      en: volunteer
+      es: voluntario
+
+defaults:
+  E_flood:
+    '3': [A_evacuate, A_notify]
+    '4': [A_evacuate, A_deliver]
+  E_outage:
+    '2': [A_notify]
+    '3': [A_deliver, A_notify]
