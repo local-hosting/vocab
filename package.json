@@ -30,7 +30,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "pretest": "yarn build",
-    "ci": "yarn validate && yarn typecheck && yarn test"
+    "ci": "yarn build && yarn validate && yarn typecheck && yarn test"
   },
   "dependencies": {
     "@local-hosting/compose": "0.1.0",
