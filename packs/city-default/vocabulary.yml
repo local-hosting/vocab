@@ -1,0 +1,152 @@
+events:
+  - id: E_dinner
+    code: 1
+    labels:
+      en: dinner
+      es: cena
+  - id: E_commute
+    code: 2
+    labels:
+      en: commute
+      es: viaje al trabajo
+  - id: E_errand
+    code: 3
+    labels:
+      en: errand
+      es: recado
+
+actions:
+  - id: A_pickup
+    code: 10
+    events: [E_dinner, E_commute]
+    labels:
+      en: pickup
+      es: recoger
+  - id: A_dropoff
+    code: 11
+    events: [E_commute]
+    labels:
+      en: drop off
+      es: dejar
+  - id: A_notify
+    code: 12
+    events: [E_dinner, E_errand]
+    labels:
+      en: notify
+      es: avisar
+  - id: A_meet
+    code: 13
+    events: [E_errand]
+    labels:
+      en: meet
+      es: reunirse
+
+places:
+  - id: P_home
+    code: 20
+    type: apartment_building
+    h3: 8928308280fffff
+    labels:
+      en: home
+      es: casa
+  - id: P_school
+    code: 21
+    type: university
+    h3: 8928308282fffff
+    labels:
+      en: school
+      es: escuela
+  - id: P_grocery
+    code: 22
+    type: grocery_store
+    h3: 8928308284fffff
+    labels:
+      en: grocery store
+      es: tienda de comestibles
+  - id: P_transit_hub
+    code: 23
+    type: train_station
+    h3: 8928308286fffff
+    labels:
+      en: transit hub
+      es: estación de tránsito
+  - id: P_park
+    code: 24
+    type: public_park
+    h3: 8928308288fffff
+    labels:
+      en: neighborhood park
+      es: parque del barrio
+  - id: P_clinic
+    code: 25
+    type: hospital
+    h3: 892830828afffff
+    labels:
+      en: clinic
+      es: clínica
+  - id: P_cafe
+    code: 26
+    type: cafe
+    h3: 892830828cfffff
+    labels:
+      en: cafe
+      es: café
+
+resources:
+  - id: R_milk
+    code: 50
+    place_id: P_grocery
+    labels:
+      en: milk
+      es: leche
+  - id: R_ride
+    code: 51
+    labels:
+      en: ride
+      es: viaje
+  - id: R_medicine
+    code: 52
+    place_id: P_clinic
+    labels:
+      en: medicine
+      es: medicina
+  - id: R_childcare
+    code: 53
+    place_id: P_home
+    labels:
+      en: childcare
+      es: cuidado infantil
+  - id: R_groceries
+    code: 54
+    place_id: P_grocery
+    labels:
+      en: groceries
+      es: comestibles
+
+actors:
+  - id: PR_parent
+    code: 40
+    labels:
+      en: parent
+      es: padre o madre
+  - id: PR_neighbor
+    code: 41
+    labels:
+      en: neighbor
+      es: vecino
+  - id: PR_coworker
+    code: 42
+    labels:
+      en: coworker
+      es: compañero de trabajo
+
+defaults:
+  E_dinner:
+    '2': [A_notify]
+    '3': [A_pickup, A_notify]
+  E_commute:
+    '2': [A_dropoff]
+    '3': [A_pickup, A_dropoff]
+  E_errand:
+    '2': [A_meet]
+    '3': [A_meet, A_notify]

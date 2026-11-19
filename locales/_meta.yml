@@ -1,0 +1,4 @@
+# Platform-owned translations merged at compile (labels only).
+version: 1
+publish_languages: [en, es]
+merge_policy: overlay_pack_labels

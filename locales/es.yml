@@ -1,0 +1,6 @@
+# Platform Spanish labels (merged at compile; pack en spine may still carry es during migration).
+labels:
+  E_dinner: cena
+  E_commute: viaje al trabajo
+  P_home: casa
+  R_milk: leche
