@@ -2,7 +2,14 @@
   "name": "@local-hosting/vocab",
   "packageManager": "yarn@4.18.1",
   "version": "0.1.0",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/local-hosting/vocab.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "description": "Community vocabulary packs (places, resources, actors) in YAML.",
   "type": "module",
   "license": "UNLICENSED",
