@@ -19,10 +19,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          count="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls" --jq 'length')"
-          if [ "${count}" -ge 1 ]; then
-            echo "main advance is linked to ${count} pull request(s); OK"
-            exit 0
-          fi
+          for attempt in 1 2 3 4 5; do
+            count="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls" --jq 'length')"
+            if [ "${count}" -ge 1 ]; then
+              echo "main advance is linked to ${count} pull request(s); OK"
+              exit 0
+            fi
+            if [ "${attempt}" -lt 5 ]; then
+              echo "pull request link not visible yet (attempt ${attempt}/5); retrying…"
+              sleep $((attempt * 3))
+            fi
+          done
           echo "::error::Direct pushes to main are not allowed. Open a pull request, pass CI, then merge."
           exit 1
