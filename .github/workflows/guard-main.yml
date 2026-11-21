@@ -1,0 +1,28 @@
+# Blocks direct pushes to main on private repos (no GitHub Team branch protection).
+# Merges from pull requests are allowed; rebase-merge/squash/merge commits link via the commits/:sha/pulls API.
+name: guard main
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  require-pr-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require merged pull request for main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          count="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls" --jq 'length')"
+          if [ "${count}" -ge 1 ]; then
+            echo "main advance is linked to ${count} pull request(s); OK"
+            exit 0
+          fi
+          echo "::error::Direct pushes to main are not allowed. Open a pull request, pass CI, then merge."
+          exit 1
