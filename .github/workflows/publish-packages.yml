@@ -26,4 +26,6 @@ jobs:
           corepack prepare yarn@4.18.1 --activate
       - run: bash scripts/publish-packages.sh
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          # GITHUB_TOKEN has packages:write on this job; PAT optional for private upstream deps
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN || secrets.GITHUB_TOKEN }}
