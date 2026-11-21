@@ -21,11 +21,20 @@ jobs:
           node-version: '26'
           registry-url: https://npm.pkg.github.com
           scope: '@local-hosting'
+          # Org PAT can read/write packages published by workspace stack publish.
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
       - run: |
           corepack enable
           corepack prepare yarn@4.18.1 --activate
+      - name: Require org packages token
+        env:
+          PAT: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+        run: |
+          if [ -z "${PAT}" ]; then
+            echo "::error::Set LOCAL_HOSTING_REPO_TOKEN (write:packages) for org GitHub Packages."
+            exit 1
+          fi
       - run: bash scripts/publish-packages.sh
         env:
-          # GITHUB_TOKEN has packages:write on this job; PAT optional for private upstream deps
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          YARN_NPM_AUTH_TOKEN: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN || secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
