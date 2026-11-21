@@ -19,9 +19,61 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: local-hosting/workspace
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          path: ws
+      - uses: actions/checkout@v4
+        with:
+          repository: local-hosting/comms
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          path: ws/comms
+      - uses: actions/checkout@v4
+        with:
+          repository: local-hosting/frames
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          path: ws/frames
+      - uses: actions/checkout@v4
+        with:
+          repository: local-hosting/compose
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          path: ws/compose
+      - uses: actions/checkout@v4
+        with:
+          repository: local-hosting/local-ai
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          path: ws/local-ai
+      - uses: actions/checkout@v4
+        with:
+          repository: local-hosting/spatial-ai
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          path: ws/spatial-ai
+      - uses: actions/checkout@v4
+        with:
+          path: ws/vocab
+      - uses: actions/checkout@v4
+        with:
+          repository: local-hosting/spool
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          path: ws/spool
+      - uses: actions/checkout@v4
+        with:
+          repository: local-hosting/geokit
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          path: ws/geokit
+      - uses: actions/checkout@v4
+        with:
+          repository: local-hosting/geotypes
+          token: ${{ secrets.LOCAL_HOSTING_REPO_TOKEN }}
+          path: ws/geotypes
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.TOOLCHAIN_NODE }}
-      - run: corepack enable && corepack prepare yarn@${{ env.TOOLCHAIN_YARN }} --activate
-      - run: yarn install --immutable
-      - run: yarn ci
+      - name: Enable Yarn
+        run: corepack enable && corepack prepare yarn@${{ env.TOOLCHAIN_YARN }} --activate
+      - working-directory: ws
+        run: yarn install --immutable
+      - working-directory: ws
+        run: yarn bootstrap:stack
+      - working-directory: ws
+        run: yarn workspace @local-hosting/vocab ci
